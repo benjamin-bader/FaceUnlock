@@ -1,12 +1,34 @@
 Face Unlock API
 ===============
 
-Enable Face Unlock in your own apps.
+Enable Face Unlock in your own apps
+-----------------------------------
+
+Unlocking your phone by looking at it is cool.  Why not unlock your apps by looking at them, too?
+
+A few phones currently have Face Unlock enabled, and increasingly more are shipping with it.  While the underlying technology is closed and proprietary, the interface to it is merely private.  This library exposes an public API into the private unlock service, allowing you to make use of it it your own apps.
+
+Limitations
+-----------
+
+This library will only work if:
+* The phone has Face Unlock
+* The owner has configured and enabled Face Unlock
+* The owner *also* has another form of password enabled
+
+Example
+-------
 
 ```java
 public class MainActivity extends Activity {
+  // This is your entry point into Face Unlock
   private FaceUnlock faceUnlock;
+  
+  // FaceUnlock needs a surface on which to render the
+  // camera UI
   private SurfaceView unlockSurface;
+  
+  // Just something to trigger the unlock sequence
   private Button unlockButton;
 
   @Override
@@ -37,7 +59,11 @@ public class MainActivity extends Activity {
     unlockButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        // Note that not all devices support face unlock, and not
+        // everyone on such a device has it turned on.  Be sure to
+        // check this!
         if (faceUnlock.isEnabled()) {
+          // This will trigger the unlock UI.
           faceUnlock.start(unlockSurface);
         }
       }
@@ -52,8 +78,16 @@ Download
 Face Unlock API is currently available as snapshot in the Sonatype repo, pending
 further testing:
 
-```
-compile 'com.bendb.faceunlock:faceunlock:0.1.0-SNAPSHOT@aar'
+```gradle
+// in build.gradle
+
+repositories {
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+  compile 'com.bendb.faceunlock:faceunlock:0.1.0-SNAPSHOT@aar'
+}
 ```
 
 License
