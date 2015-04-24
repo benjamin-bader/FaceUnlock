@@ -12,6 +12,7 @@ Limitations
 -----------
 
 This library will only work if:
+* API level is 15+
 * The phone has Face Unlock
 * The owner has configured and enabled Face Unlock
 * The owner *also* has another form of password enabled
