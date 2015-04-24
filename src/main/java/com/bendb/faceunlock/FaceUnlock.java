@@ -1,3 +1,20 @@
+/*
+ *  * Copyright (C) 2015 Benjamin Bader
+ *  * Copyright (C) 2012 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.bendb.faceunlock;
 
 import android.app.admin.DevicePolicyManager;
@@ -21,7 +38,18 @@ import com.android.internal.policy.IFaceLockInterface;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author bendb
+ * An interface into Android's Face Unlock infrastructure.
+ *
+ * <p>FaceUnlock contains all functionality required to access Face Unlock in
+ * an app.  It requires a {@link Context} to establish service connections, a
+ * {@link View} on which to render the unlock UI, and a {@link FaceUnlockCallback}
+ * to report results.
+ *
+ * <p>Note that this class holds a {@link Context} reference, and as such has
+ * the potential to keep it alive indefinitely.
+ *
+ * @link https://github.com/benjamin-bader/FaceUnlockDemo
+ * @link https://github.com/android/platform_frameworks_base/blob/master/packages/Keyguard/src/com/android/keyguard/FaceUnlock.java
  */
 public class FaceUnlock implements Handler.Callback {
     private static final String TAG = "FaceUnlock";
